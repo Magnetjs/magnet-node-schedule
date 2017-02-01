@@ -12,8 +12,8 @@ import forEach from 'lodash/fp/forEach'
 
 export default class NodeSchedule extends base {
   async setup () {
-    const config = this.config.hodeSchedule
-    const folderPath = config.folderPath || path.join(process.cwd(), 'server', 'jobs')
+    const config = this.config.nodeSchedule
+    const folderPath = (config && config.folderPath) || path.join(process.cwd(), 'server', 'jobs')
     const jobFiles = requireAll(folderPath)
 
     flow(
