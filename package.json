@@ -1,5 +1,5 @@
 {
-  "name": "magnet-node-scheduler",
+  "name": "magnet-node-schedule",
   "version": "0.1.0",
   "description": "Readme",
   "main": "dist/index.js",
