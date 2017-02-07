@@ -6,49 +6,13 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _base2 = require('magnet-core/base');
+var _base = require('magnet-core/base');
 
-var _base3 = _interopRequireDefault(_base2);
+var _base2 = _interopRequireDefault(_base);
 
 var _nodeSchedule = require('node-schedule');
 
 var _nodeSchedule2 = _interopRequireDefault(_nodeSchedule);
-
-var _path = require('path');
-
-var _path2 = _interopRequireDefault(_path);
-
-var _requireAll = require('require-all');
-
-var _requireAll2 = _interopRequireDefault(_requireAll);
-
-var _flow = require('lodash/fp/flow');
-
-var _flow2 = _interopRequireDefault(_flow);
-
-var _mapValues = require('lodash/fp/mapValues');
-
-var _mapValues2 = _interopRequireDefault(_mapValues);
-
-var _map = require('lodash/fp/map');
-
-var _map2 = _interopRequireDefault(_map);
-
-var _reduce = require('lodash/fp/reduce');
-
-var _reduce2 = _interopRequireDefault(_reduce);
-
-var _merge = require('lodash/fp/merge');
-
-var _merge2 = _interopRequireDefault(_merge);
-
-var _values = require('lodash/fp/values');
-
-var _values2 = _interopRequireDefault(_values);
-
-var _forEach = require('lodash/fp/forEach');
-
-var _forEach2 = _interopRequireDefault(_forEach);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -60,8 +24,18 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var NodeSchedule = function (_base) {
-  _inherits(NodeSchedule, _base);
+// import path from 'path'
+// import requireAll from 'require-all'
+// import flow from 'lodash/fp/flow'
+// import mapValues from 'lodash/fp/mapValues'
+// import map from 'lodash/fp/map'
+// import reduce from 'lodash/fp/reduce'
+// import merge from 'lodash/fp/merge'
+// import values from 'lodash/fp/values'
+// import forEach from 'lodash/fp/forEach'
+
+var NodeSchedule = function (_Base) {
+  _inherits(NodeSchedule, _Base);
 
   function NodeSchedule() {
     _classCallCheck(this, NodeSchedule);
@@ -73,31 +47,29 @@ var NodeSchedule = function (_base) {
     key: 'setup',
     value: function () {
       var _ref = _asyncToGenerator(regeneratorRuntime.mark(function _callee() {
-        var _this2 = this;
-
-        var config, folderPath, jobFiles;
         return regeneratorRuntime.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                config = this.config.hodeSchedule;
-                folderPath = config.folderPath || _path2.default.join(process.cwd(), 'server', 'jobs');
-                jobFiles = (0, _requireAll2.default)(folderPath);
+                this.app.nodeSchedule = _nodeSchedule2.default;
 
+                // const config = this.config.nodeSchedule
+                // const folderPath = (config && config.folderPath) || path.join(process.cwd(), 'server', 'jobs')
+                // const jobFiles = requireAll(folderPath)
 
-                (0, _flow2.default)(_values2.default, (0, _mapValues2.default)('default'),
-                // Inject app to all file
-                (0, _map2.default)(function (jobFile) {
-                  return jobFile(_this2.app);
-                }),
-                // Merge all files in one flat array
-                (0, _reduce2.default)(function (combined, process) {
-                  return (0, _merge2.default)(combined, process);
-                }, []), (0, _forEach2.default)(function (job) {
-                  _nodeSchedule2.default.scheduleJob(job.options, job.process);
-                }))(jobFiles);
+                // flow(
+                //   values,
+                //   mapValues('default'),
+                //   // Inject app to all file
+                //   map((jobFile) => jobFile(this.app)),
+                //   // Merge all files in one flat array
+                //   reduce((combined, process) => merge(combined, process), []),
+                //   forEach((job) => {
+                //     schedule.scheduleJob(job.options, job.process)
+                //   })
+                // )(jobFiles)
 
-              case 4:
+              case 1:
               case 'end':
                 return _context.stop();
             }
@@ -114,6 +86,6 @@ var NodeSchedule = function (_base) {
   }]);
 
   return NodeSchedule;
-}(_base3.default);
+}(_base2.default);
 
 exports.default = NodeSchedule;
