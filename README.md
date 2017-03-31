@@ -1,4 +1,6 @@
 ### Usage
+
+[![Greenkeeper badge](https://badges.greenkeeper.io/Magnetjs/magnet-node-schedule.svg)](https://greenkeeper.io/)
 All router api should refer [node-schedule](https://github.com/node-schedule/node-schedule)
 
 Basic
