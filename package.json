@@ -28,12 +28,15 @@
     "test": "babel-node tests/index.js | tap-spec",
     "watch": "nodemon --ignore dist --exec \"tsc --source-maps\"",
     "watch-all": "concurrently \"npm run watch\" \"npm run watch-test\"",
-    "watch-test": "nodemon --delay 0.5 --ignore src --exec babel-node tests/index.js | tap-spec"
+    "watch-test": "nodemon --delay 0.5 --ignore src --exec babel-node tests/index.js | tap-spec",
+    "prepare": "yarn run snyk-protect",
+    "snyk-protect": "snyk-protect"
   },
   "dependencies": {
     "magnet-core": "^4.0.1",
     "node-schedule": "^1.2.0",
-    "typescript": "^2.2.1"
+    "typescript": "^2.2.1",
+    "@snyk/protect": "latest"
   },
   "devDependencies": {
     "concurrently": "^3.3.0",
@@ -44,5 +47,6 @@
   },
   "engines": {
     "node": ">=6.9.5"
-  }
+  },
+  "snyk": true
 }
